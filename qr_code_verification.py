@@ -12,11 +12,16 @@ DEFAULT_PASSWORD = "123"
 ATTENDEES_FILE = "attendees.csv"
 
 def authenticate():
-    st.session_state['authenticated'] = False
-    username = st.text_input("Username")
+    if 'authenticated' not in st.session_state:
+        st.session_state['authenticated'] = False
+    if 'username' not in st.session_state:
+        st.session_state['username'] = ""
+
+    st.session_state['username'] = st.text_input("Username", value=st.session_state['username'])
     password = st.text_input("Password", type="password")
+
     if st.button("Login"):
-        if username == DEFAULT_ADMIN and password == DEFAULT_PASSWORD:
+        if st.session_state['username'] == DEFAULT_ADMIN and password == DEFAULT_PASSWORD:
             st.session_state['authenticated'] = True
         else:
             st.error("Invalid Credentials")
