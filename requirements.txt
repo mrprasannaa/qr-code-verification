@@ -1,8 +1,6 @@
 streamlit
 pandas
 qrcode
-pillow
-smtplib
-requests
+yagmail
+numpy
 datetime
-twilio
