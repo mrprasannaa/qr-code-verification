@@ -36,7 +36,7 @@ def generate_qr_code(text):
     return buffer.getvalue()
 
 def send_email(email, qr_code):
-    yag = yagmail.SMTP("mrprasannaa@gmail.com", "gpsaibaba!1")
+    yag = yagmail.SMTP("your-email@gmail.com", "your-password")
     yag.send(to=email, subject="Your Event QR Code", contents="Scan this QR code at the event.", attachments=qr_code)
 
 def main():
@@ -60,12 +60,13 @@ def main():
     
     search_id = st.text_input("Search Attendee by ID")
     if search_id:
-        result = attendees[attendees["ID"] == search_id]
+        result = attendees[attendees["ID"].astype(str) == search_id]
         st.write(result)
+        
         if not result.empty:
             if st.button("Mark as Attended"):
-                attendees.loc[attendees["ID"] == search_id, "Attended"] = "Yes"
-                attendees.loc[attendees["ID"] == search_id, "Time Entered"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                attendees.loc[attendees["ID"].astype(str) == search_id, "Attended"] = "Yes"
+                attendees.loc[attendees["ID"].astype(str) == search_id, "Time Entered"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 save_attendees(attendees)
                 st.success("Attendee marked as attended!")
     
