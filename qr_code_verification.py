@@ -8,7 +8,7 @@ from datetime import datetime
 
 # --- SETUP ---
 DEFAULT_ADMIN = "Admin"
-DEFAULT_PASSWORD = "123"
+DEFAULT_PASSWORD = ""
 ATTENDEES_FILE = "attendees.csv"
 
 def authenticate():
